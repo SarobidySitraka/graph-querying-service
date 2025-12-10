@@ -58,20 +58,6 @@ async def lifespan(fastapi_app: FastAPI):
         logger.critical(f"Critical error on startup: {e}")
         raise
 
-    try:
-        from openai import OpenAI
-        client = OpenAI(api_key=settings.openai_api_key)
-
-        response = client.responses.create(
-            model=settings.llm_model,
-            input="Test de connexion."
-        )
-        print("Connexion à l'API OpenAI réussie !")
-        app.state.client = client
-    except Exception as e:
-        print(f"Erreur lors de la connexion à l'API OpenAI : {e}")
-        sys.exit(1)
-
     yield
 
     # Shutdown
@@ -85,6 +71,17 @@ async def lifespan(fastapi_app: FastAPI):
     logger.info("Application stopped")
 
 
+# Initialize app before using it
+app = FastAPI(
+    title="graph-querying-service",
+    description="Neo4j graph querying service with GraphRAG",
+    version="1.0.0",
+    docs_url="/docs",
+    redoc_url="/redoc",
+    openapi_url="/openapi.json"
+)
+
+
 app = FastAPI(
     title=settings.app_name,
     description=settings.app_description,
@@ -94,8 +91,6 @@ app = FastAPI(
     openapi_url="/openapi.json",
     lifespan=lifespan
 )
-
-# Setup middlewares
 setup_cors(app)
 setup_error_handlers(app)
 setup_request_logging(app)
