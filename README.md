@@ -8,22 +8,22 @@ Service professionnel de requêtage Neo4j avec GraphRAG et LLM permettant d'inte
 
 ## Fonctionnalités
 
-- ** Requêtes Cypher**: Exécution sécurisée de requêtes Cypher directes
-- ** Langage Naturel**: Conversion automatique de questions en français vers Cypher
-- ** GraphRAG**: Utilisation intelligente du contexte et du schéma de la base
-- ** Validation**: Validation automatique des requêtes avant exécution
-- **️ Sécurité**: Authentification API Key, rate limiting, mode lecture seule
-- ** Performance**: Cache Redis, optimisation automatique des requêtes
-- ** Monitoring**: Logs structurés, métriques, health checks
+- **Requêtes Cypher**: Exécution sécurisée de requêtes Cypher directes
+- **Langage Naturel**: Conversion automatique de questions en français vers Cypher
+- **GraphRAG**: Utilisation intelligente du contexte et du schéma de la base
+- **Validation**: Validation automatique des requêtes avant exécution
+- **Sécurité**: Authentification API Key, rate limiting, mode lecture seule
+- **Performance**: Cache Redis, optimisation automatique des requêtes
+- **Monitoring**: Logs structurés, métriques, health checks
 
 ## Architecture
 
 ```
 ┌─────────────────────────────────────────────────────────┐
 │                    API Layer (FastAPI)                  │
-│  ┌──────────┐ ┌──────────┐ ┌──────────┐ ┌──────────┐  │
-│  │  Health  │ │  Cypher  │ │ Natural  │ │  Schema  │  │
-│  └──────────┘ └──────────┘ └──────────┘ └──────────┘  │
+│  ┌──────────┐ ┌──────────┐ ┌──────────┐ ┌──────────┐    │
+│  │  Health  │ │  Cypher  │ │ Natural  │ │  Schema  │    │
+│  └──────────┘ └──────────┘ └──────────┘ └──────────┘    │
 └────────────────────┬────────────────────────────────────┘
                      │
          ┌───────────┴───────────┐
